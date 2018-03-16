@@ -34,15 +34,34 @@ namespace DataStructureDemo
 
         static void Main()
         {
-            TestDisposingEntity();
+            //TestDisposingEntity();
 
-            GC.Collect();
+            //GC.Collect();
 
-            var myPrinter = new MultyFunctionalUnit();
-            PrintTestPage(myPrinter);
+            //var myPrinter = new MultyFunctionalUnit();
+            //PrintTestPage(myPrinter);
 
-            var myColorPrinter = new ColorPrinter(ConsoleColor.Green);
-            PrintTestPage(myColorPrinter);
+            //var myColorPrinter = new ColorPrinter(ConsoleColor.Green);
+            //PrintTestPage(myColorPrinter);
+
+
+            var point = new Point(3, 45, -4, 89, 6);
+            var str = Convert.ToString(point);
+            Console.WriteLine(str);
+
+            var anotherPoint = new Point(point);
+
+            var p2 = new Point(2, 4, 6, -89, 3);
+
+            var clonePoint1 = point.Clone() as Point;
+            var clonePoint2 = (Point)point.Clone();
+
+
+            Console.WriteLine(point.Equals(anotherPoint));
+            Console.WriteLine(point.Equals(p2));
+
+            //foreach (var coordinate in point)
+            //    Console.WriteLine(coordinate);
         }
     }
 }
