@@ -2,7 +2,7 @@
 
 namespace DataStructureDemo
 {
-    class ColorPrinter : IPrintable
+    class ColorPrinter : IPrintable, IDisposable
     {
         private ConsoleColor color;
 
@@ -24,6 +24,15 @@ namespace DataStructureDemo
 
         public void Print(byte[] data) =>
             StaffPrint(string.Join(" ", Array.ConvertAll(data, item => $"0x{item:X}")));
-        
+
+        public void Dispose()
+        {
+            Print("Disposed!");
+        }
+
+        ~ColorPrinter()
+        {
+            Print("Finilized!");
+        }
     }
 }

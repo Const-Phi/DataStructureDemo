@@ -21,10 +21,23 @@ namespace DataStructureDemo
             }
 
             printer.Print(Environment.NewLine);
-        } 
+        }
+
+        static void TestDisposingEntity()
+        {
+            using (var cp = new ColorPrinter(ConsoleColor.Red))
+            {
+                cp.Print("Created!");
+                cp.Print("Do smth...");
+            }
+        }
 
         static void Main()
         {
+            TestDisposingEntity();
+
+            GC.Collect();
+
             var myPrinter = new MultyFunctionalUnit();
             PrintTestPage(myPrinter);
 

@@ -14,5 +14,10 @@ namespace DataStructureDemo
         }
 
         public byte[] Scan() => new byte[] { 42 };
+
+        ~MultyFunctionalUnit()
+        {
+            Print("I'm die");
+        }
     }
 }
