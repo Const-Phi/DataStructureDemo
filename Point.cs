@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataStructureDemo
 {
@@ -16,8 +14,8 @@ namespace DataStructureDemo
             get { return dimension; }
             protected set
             {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(Dimension), "Dimension must be greater then zero.");
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException(nameof(Dimension), "Dimension must be greater then or equal zero.");
                 dimension = value;
 
                 coordinates = new double[Dimension];
@@ -54,6 +52,18 @@ namespace DataStructureDemo
 
         #endregion
 
+        public double this[int index]
+        {
+            get
+            {
+                return coordinates[index];
+            }
+            set
+            {
+                coordinates[index] = value;
+            }
+        }
+
         public override string ToString() => $"{{{string.Join("; ", this)}}}";
 
         public IEnumerator<double> GetEnumerator()
@@ -66,17 +76,22 @@ namespace DataStructureDemo
 
         public bool Equals(Point other)
         {
-            if (Dimension != other.Dimension)
+            if (ReferenceEquals(other, null))
+                return false;
+
+            if (ReferenceEquals(other, this))
+                return true;
+
+            if (GetType() != other.GetType() || 
+                Dimension != other.Dimension)
                 return false;
 
             return DistanceBetween(this, other) <= double.Epsilon;
         }
 
-        public object Clone()
-        {
-            return new Point(this);
-        }
-
+        public int CompareTo(Point other) =>
+            (int) this.Zip(other, (c1, c2) => c1 - c2).Sum();
+ 
         public static double DistanceBetween(Point p1, Point p2)
         {
             if (p1.Dimension != p2.Dimension)
@@ -85,8 +100,53 @@ namespace DataStructureDemo
             return p1.Zip(p2, (c1, c2) => Math.Abs(c1 - c2)).Sum();
         }
 
-        public int CompareTo(Point other) => 
-            (int)this.Zip(other, (c1, c2) => c1 - c2).Sum();
+        public object Clone() => new Point(this);
 
+
+        public class PointIterator : IEnumerator<double>
+        {
+            private const int defaultIndexValue = -1;
+
+            private Point point;
+
+            private int index = defaultIndexValue;
+
+            public PointIterator(Point point)
+            {
+                this.point = point;
+            }
+
+            public double Current
+            {
+                get
+                {
+                    return point[index];
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool MoveNext()
+            {
+                ++index;
+                return index < point.Dimension;
+            }
+
+            public void Reset()
+            {
+                index = defaultIndexValue;
+            }
+        }
     }
 }
