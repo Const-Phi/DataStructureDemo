@@ -77,6 +77,10 @@ namespace DataStructureDemo
             PrintStudentList(students, "\tsorting by lastName:");
             students.Sort(new Student.AgeComparator());
             PrintStudentList(students, "\tsorting by age:");
+
+            // demo of implicit and explicit type casting
+            ComplexNumber z = Math.PI;
+            double value = (double) z;
         }
 
         private static void PrintStudentList(List<Student> students, String message)
