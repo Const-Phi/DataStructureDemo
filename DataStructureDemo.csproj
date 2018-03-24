@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ColorPrinter.cs" />
     <Compile Include="ComplexNumber.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="IPrintable.cs" />
     <Compile Include="IScannable.cs" />
     <Compile Include="MultyFunctionalUnit.cs" />

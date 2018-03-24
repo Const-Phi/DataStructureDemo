@@ -64,6 +64,25 @@ namespace DataStructureDemo
             }
         }
 
+
+        public double this_int_index
+        {
+            get
+            {
+                return coordinates[0];
+            }
+            set
+            {
+                coordinates[0] = value;
+            }
+        }
+
+
+        public double this[int x, int y]
+        {
+            get { return 42; }
+        }
+
         public override string ToString() => $"{{{string.Join("; ", this)}}}";
 
         public IEnumerator<double> GetEnumerator()
