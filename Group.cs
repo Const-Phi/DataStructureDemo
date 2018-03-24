@@ -43,12 +43,13 @@ namespace DataStructureDemo
 
         class StudentNotFoundException : Exception
         {
-            public StudentNotFoundException() 
+            public StudentNotFoundException()
                 : base()
             { }
 
-            public StudentNotFoundException(string lastName) 
+            public StudentNotFoundException(string lastName)
                 : base($"Student with last name \'{lastName}\' not found.")
             { }
         }
+    }
 }

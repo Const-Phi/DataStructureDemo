@@ -81,6 +81,11 @@ namespace DataStructureDemo
             // demo of implicit and explicit type casting
             ComplexNumber z = Math.PI;
             double value = (double) z;
+
+            MyStrangeNumber a = 5, b = 10; 
+            var c = a + b;
+            
+
         }
 
         private static void PrintStudentList(List<Student> students, String message)
